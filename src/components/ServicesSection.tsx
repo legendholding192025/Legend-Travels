@@ -8,7 +8,7 @@ const services = [
     id: "holidays",
     title: "Holidays",
     description: "Curated vacation packages and bespoke travel experiences tailored to your desires.",
-    image: "/tropical-beach-paradise-with-palm-trees-and-crysta.jpg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6b87e26cf5.43301910_20251024_120527.webp",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
@@ -25,7 +25,7 @@ const services = [
     id: "ticketing",
     title: "Ticketing",
     description: "Seamless booking solutions for flights, trains, and transportation worldwide.",
-    image: "/modern-airplane-at-airport-terminal-with-boarding-.jpg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6ba704e459.11634108_20251024_120559.webp",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
@@ -42,7 +42,7 @@ const services = [
     id: "events",
     title: "Events",
     description: "Exclusive access to cultural events, festivals, and unique experiences.",
-    image: "/vibrant-cultural-festival-with-colorful-decoration.jpg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
@@ -59,7 +59,7 @@ const services = [
     id: "corporate",
     title: "Corporate Travel Management",
     description: "Comprehensive business travel solutions with advanced reporting and cost control.",
-    image: "/professional-business-travelers-in-modern-airport-.jpg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path

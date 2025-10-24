@@ -80,7 +80,7 @@ const Hero = () => {
           appearance: none;
         }
       `}</style>
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24 pt-24">
       {/* Fallback background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600" />
       {/* Background Image */}
@@ -125,8 +125,9 @@ const Hero = () => {
 
           {/* Search Form */}
           <form onSubmit={handleSearch} className="space-y-6">
-            {activeTab === "flights" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 transition-all duration-300">
+              {activeTab === "flights" && (
+                <>
                 {/* From */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">
@@ -209,11 +210,11 @@ const Hero = () => {
                     />
                   </div>
                 </div>
-              </div>
-            )}
+                </>
+              )}
 
-            {activeTab === "hotels" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {activeTab === "hotels" && (
+                <>
                 {/* Destination */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">
@@ -279,11 +280,13 @@ const Hero = () => {
                     />
                   </div>
                 </div>
-              </div>
-            )}
+                {/* Empty div for consistent spacing */}
+                <div></div>
+                </>
+              )}
 
-            {activeTab === "cars" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {activeTab === "cars" && (
+                <>
                 {/* Pickup Location */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">
@@ -349,8 +352,11 @@ const Hero = () => {
                     />
                   </div>
                 </div>
-              </div>
-            )}
+                {/* Empty div for consistent spacing */}
+                <div></div>
+                </>
+              )}
+            </div>
 
             {/* Search Button */}
             <div className="flex justify-center">
