@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,40 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+  const isHolidaysPage = pathname === '/holidays';
+  const isTransparentPage = isHomePage || isHolidaysPage;
+
+  // Helper function for navigation text colors
+  const getNavTextColor = () => {
+    if (isTransparentPage) {
+      return isScrolled && isScrollingUp 
+        ? 'text-gray-700 hover:text-gray-700' 
+        : 'text-white hover:text-white';
+    }
+    return 'text-gray-700 hover:text-gray-700';
+  };
+
+  // Helper function for dropdown text colors
+  const getDropdownTextColor = () => {
+    if (isTransparentPage) {
+      return isScrolled && isScrollingUp 
+        ? 'text-gray-700 hover:bg-gray-100' 
+        : 'text-white hover:bg-white/20';
+    }
+    return 'text-gray-700 hover:bg-gray-100';
+  };
+
+  // Helper function for dropdown background
+  const getDropdownBg = () => {
+    if (isTransparentPage) {
+      return isScrolled && isScrollingUp 
+        ? 'bg-white border border-gray-200' 
+        : 'bg-black/80 backdrop-blur-sm border border-white/20';
+    }
+    return 'bg-white border border-gray-200';
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -91,11 +126,17 @@ const Header = () => {
   return (
     <header 
       className={`sticky top-0 z-50 border-b-4 transition-all duration-300 ${
-        isScrolled && isScrollingUp 
-          ? 'bg-white shadow-lg' 
-          : isScrolled 
-          ? 'bg-transparent -translate-y-full' 
-          : 'bg-transparent'
+        isTransparentPage 
+          ? (isScrolled && isScrollingUp 
+              ? 'bg-white shadow-lg' 
+              : isScrolled 
+              ? 'bg-transparent -translate-y-full' 
+              : 'bg-transparent')
+          : (isScrolled && isScrollingUp 
+              ? 'bg-white shadow-lg' 
+              : isScrolled 
+              ? 'bg-white shadow-lg -translate-y-full' 
+              : 'bg-white shadow-lg')
       }`} 
       style={{ borderBottomColor: '#EE8900' }}
     >
@@ -105,7 +146,10 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <img 
-                src={isScrolled && isScrollingUp ? "/logo/travel.svg" : "/logo/travel 2.svg"} 
+                src={isTransparentPage 
+                  ? (isScrolled && isScrollingUp ? "/logo/travel.svg" : "/logo/travel 2.svg")
+                  : "/logo/travel.svg"
+                } 
                 alt="Legend Travels" 
                 className="h-16 w-auto transition-all duration-300"
               />
@@ -116,22 +160,14 @@ const Header = () => {
           <nav className="hidden md:flex space-x-8">
             <Link 
               href="/" 
-              className={`${
-                isScrolled && isScrollingUp 
-                  ? 'text-gray-700 hover:text-gray-700' 
-                  : 'text-white hover:text-white'
-              } px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
+              className={`${getNavTextColor()} px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
             >
               Home
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EE8900] transition-all duration-200 group-hover:w-full"></div>
             </Link>
             <Link 
               href="/about-us" 
-              className={`${
-                isScrolled && isScrollingUp 
-                  ? 'text-gray-700 hover:text-gray-700' 
-                  : 'text-white hover:text-white'
-              } px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
+              className={`${getNavTextColor()} px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
             >
               About Us
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EE8900] transition-all duration-200 group-hover:w-full"></div>
@@ -143,11 +179,7 @@ const Header = () => {
             >
               <button
                 onClick={toggleServices}
-                className={`${
-                  isScrolled && isScrollingUp 
-                    ? 'text-gray-700 hover:text-gray-700' 
-                    : 'text-white hover:text-white'
-                } px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 flex items-center relative group`}
+                className={`${getNavTextColor()} px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 flex items-center relative group`}
               >
                 Services
                 <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,31 +189,19 @@ const Header = () => {
               </button>
               
               {isServicesOpen && (
-                <div className={`absolute top-full left-0 mt-1 w-48 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${
-                  isScrolled && isScrollingUp 
-                    ? 'bg-white border border-gray-200' 
-                    : 'bg-black/80 backdrop-blur-sm border border-white/20'
-                }`}
+                <div className={`absolute top-full left-0 mt-1 w-48 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${getDropdownBg()}`}
                      onMouseEnter={handleServicesMouseEnter}
                      onMouseLeave={handleServicesMouseLeave}>
                   <Link 
                     href="/ticketing" 
-                    className={`block px-4 py-2 text-sm font-helvetica ${
-                      isScrolled && isScrollingUp 
-                        ? 'text-gray-700 hover:bg-gray-100' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
+                    className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                     onClick={() => setIsServicesOpen(false)}
                   >
                     Ticketing
                   </Link>
                   <Link 
                     href="/holidays" 
-                    className={`block px-4 py-2 text-sm font-helvetica ${
-                      isScrolled && isScrollingUp 
-                        ? 'text-gray-700 hover:bg-gray-100' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
+                    className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                     onClick={() => setIsServicesOpen(false)}
                   >
                     Holidays
@@ -193,11 +213,7 @@ const Header = () => {
                   >
                     <button
                       onClick={toggleEvents}
-                      className={`w-full text-left px-4 py-2 text-sm font-helvetica flex items-center justify-between ${
-                        isScrolled && isScrollingUp 
-                          ? 'text-gray-700 hover:bg-gray-100' 
-                          : 'text-white hover:bg-white/20'
-                      }`}
+                      className={`w-full text-left px-4 py-2 text-sm font-helvetica flex items-center justify-between ${getDropdownTextColor()}`}
                     >
                       Events
                       <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,20 +221,12 @@ const Header = () => {
                       </svg>
                     </button>
                     {isEventsOpen && (
-                      <div className={`absolute left-full top-0 ml-1 w-48 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${
-                        isScrolled && isScrollingUp 
-                          ? 'bg-white border border-gray-200' 
-                          : 'bg-black/80 backdrop-blur-sm border border-white/20'
-                      }`}
+                      <div className={`absolute left-full top-0 ml-1 w-48 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${getDropdownBg()}`}
                            onMouseEnter={handleEventsMouseEnter}
                            onMouseLeave={handleEventsMouseLeave}>
                         <Link 
                           href="/exhibitions" 
-                          className={`block px-4 py-2 text-sm font-helvetica ${
-                            isScrolled && isScrollingUp 
-                              ? 'text-gray-700 hover:bg-gray-100' 
-                              : 'text-white hover:bg-white/20'
-                          }`}
+                          className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                           onClick={() => {
                             setIsServicesOpen(false);
                             setIsEventsOpen(false);
@@ -228,11 +236,7 @@ const Header = () => {
                         </Link>
                         <Link 
                           href="/summits" 
-                          className={`block px-4 py-2 text-sm font-helvetica ${
-                            isScrolled && isScrollingUp 
-                              ? 'text-gray-700 hover:bg-gray-100' 
-                              : 'text-white hover:bg-white/20'
-                          }`}
+                          className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                           onClick={() => {
                             setIsServicesOpen(false);
                             setIsEventsOpen(false);
@@ -242,11 +246,7 @@ const Header = () => {
                         </Link>
                         <Link 
                           href="/corporate-events" 
-                          className={`block px-4 py-2 text-sm font-helvetica ${
-                            isScrolled && isScrollingUp 
-                              ? 'text-gray-700 hover:bg-gray-100' 
-                              : 'text-white hover:bg-white/20'
-                          }`}
+                          className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                           onClick={() => {
                             setIsServicesOpen(false);
                             setIsEventsOpen(false);
@@ -262,22 +262,14 @@ const Header = () => {
             </div>
             <Link 
               href="/news" 
-              className={`${
-                isScrolled && isScrollingUp 
-                  ? 'text-gray-700 hover:text-gray-700' 
-                  : 'text-white hover:text-white'
-              } px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
+              className={`${getNavTextColor()} px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
             >
               News
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EE8900] transition-all duration-200 group-hover:w-full"></div>
             </Link>
             <Link 
               href="/contact-us" 
-              className={`${
-                isScrolled && isScrollingUp 
-                  ? 'text-gray-700 hover:text-gray-700' 
-                  : 'text-white hover:text-white'
-              } px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
+              className={`${getNavTextColor()} px-4 py-3 text-base font-medium font-helvetica transition-all duration-200 relative group`}
             >
               Contact Us
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EE8900] transition-all duration-200 group-hover:w-full"></div>
@@ -288,11 +280,7 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className={`${
-                isScrolled && isScrollingUp 
-                  ? 'text-gray-700 hover:text-gray-700 focus:text-gray-700' 
-                  : 'text-white hover:text-white focus:text-white'
-              } focus:outline-none`}
+              className={`${getNavTextColor()} focus:outline-none`}
               aria-label="Toggle menu"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -310,17 +298,15 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t transition-all duration-300 ${
-              isScrolled && isScrollingUp 
-                ? 'bg-white border-gray-200' 
-                : 'bg-black/20 backdrop-blur-sm border-white/20'
+              isTransparentPage 
+                ? (isScrolled && isScrollingUp 
+                    ? 'bg-white border-gray-200' 
+                    : 'bg-black/20 backdrop-blur-sm border-white/20')
+                : 'bg-white border-gray-200'
             }`}>
               <Link 
                 href="/" 
-                className={`${
-                  isScrolled && isScrollingUp 
-                    ? 'text-gray-700 hover:text-gray-700' 
-                    : 'text-white hover:text-white'
-                } block px-3 py-2 text-base font-medium font-helvetica relative group`}
+                className={`${getNavTextColor()} block px-3 py-2 text-base font-medium font-helvetica relative group`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
@@ -328,11 +314,7 @@ const Header = () => {
               </Link>
               <Link 
                 href="/about-us" 
-                className={`${
-                  isScrolled && isScrollingUp 
-                    ? 'text-gray-700 hover:text-gray-700' 
-                    : 'text-white hover:text-white'
-                } block px-3 py-2 text-base font-medium font-helvetica relative group`}
+                className={`${getNavTextColor()} block px-3 py-2 text-base font-medium font-helvetica relative group`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About Us
@@ -341,7 +323,7 @@ const Header = () => {
               <div>
                 <button
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="text-white hover:text-white flex items-center justify-between w-full px-3 py-2 text-base font-medium font-helvetica relative group"
+                  className={`${getNavTextColor()} flex items-center justify-between w-full px-3 py-2 text-base font-medium font-helvetica relative group`}
                 >
                   Services
                   <svg className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -353,7 +335,7 @@ const Header = () => {
                   <div className="pl-4 space-y-1">
                     <Link 
                       href="/ticketing" 
-                      className="text-gray-600 hover:text-blue-600 block px-3 py-2 text-base font-helvetica"
+                      className="text-gray-600 hover:text-gray-800 block px-3 py-2 text-base font-helvetica"
                       onClick={() => {
                         setIsMenuOpen(false);
                         setIsServicesOpen(false);
@@ -363,7 +345,7 @@ const Header = () => {
                     </Link>
                     <Link 
                       href="/holidays" 
-                      className="text-gray-600 hover:text-blue-600 block px-3 py-2 text-base font-helvetica"
+                      className="text-gray-600 hover:text-gray-800 block px-3 py-2 text-base font-helvetica"
                       onClick={() => {
                         setIsMenuOpen(false);
                         setIsServicesOpen(false);
@@ -374,7 +356,7 @@ const Header = () => {
                     <div>
                       <button
                         onClick={() => setIsEventsOpen(!isEventsOpen)}
-                        className="text-gray-600 hover:text-blue-600 flex items-center justify-between w-full px-3 py-2 text-base font-helvetica"
+                        className="text-gray-600 hover:text-gray-800 flex items-center justify-between w-full px-3 py-2 text-base font-helvetica"
                       >
                         Events
                         <svg className={`h-3 w-3 transition-transform ${isEventsOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,7 +367,7 @@ const Header = () => {
                         <div className="pl-4 space-y-1">
                           <Link 
                             href="/exhibitions" 
-                            className="text-gray-500 hover:text-blue-600 block px-3 py-2 text-sm font-helvetica"
+                            className="text-gray-500 hover:text-gray-800 block px-3 py-2 text-sm font-helvetica"
                             onClick={() => {
                               setIsMenuOpen(false);
                               setIsServicesOpen(false);
@@ -396,7 +378,7 @@ const Header = () => {
                           </Link>
                           <Link 
                             href="/summits" 
-                            className="text-gray-500 hover:text-blue-600 block px-3 py-2 text-sm font-helvetica"
+                            className="text-gray-500 hover:text-gray-800 block px-3 py-2 text-sm font-helvetica"
                             onClick={() => {
                               setIsMenuOpen(false);
                               setIsServicesOpen(false);
@@ -407,7 +389,7 @@ const Header = () => {
                           </Link>
                           <Link 
                             href="/corporate-events" 
-                            className="text-gray-500 hover:text-blue-600 block px-3 py-2 text-sm font-helvetica"
+                            className="text-gray-500 hover:text-gray-800 block px-3 py-2 text-sm font-helvetica"
                             onClick={() => {
                               setIsMenuOpen(false);
                               setIsServicesOpen(false);
@@ -424,11 +406,7 @@ const Header = () => {
               </div>
               <Link 
                 href="/news" 
-                className={`${
-                  isScrolled && isScrollingUp 
-                    ? 'text-gray-700 hover:text-gray-700' 
-                    : 'text-white hover:text-white'
-                } block px-3 py-2 text-base font-medium font-helvetica relative group`}
+                className={`${getNavTextColor()} block px-3 py-2 text-base font-medium font-helvetica relative group`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 News
@@ -436,11 +414,7 @@ const Header = () => {
               </Link>
               <Link 
                 href="/contact-us" 
-                className={`${
-                  isScrolled && isScrollingUp 
-                    ? 'text-gray-700 hover:text-gray-700' 
-                    : 'text-white hover:text-white'
-                } block px-3 py-2 text-base font-medium font-helvetica relative group`}
+                className={`${getNavTextColor()} block px-3 py-2 text-base font-medium font-helvetica relative group`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
