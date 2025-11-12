@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <CircularSection />
       <PromoBanner />
-      <StatsSection />
+      {/* <StatsSection /> */}
       <ServicesSection />
       <WhyUsSection />  
       <ContactSection />

@@ -1,76 +1,75 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 
 const services = [
   {
     title: "HOLIDAYS",
+    description:
+      "Discover your perfect getaway with curated holiday packages and expert travel planning.",
     icon: "/holidays.svg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6b87e26cf5.43301910_20251024_120527.webp",
   },
   {
     title: "TICKETING",
+    description: "Seamless booking experience for flights, trains, and events worldwide.",
     icon: "/ticketing.svg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6ba704e459.11634108_20251024_120559.webp",
   },
   {
     title: "EVENTS",
+    description:
+      "Create unforgettable experiences with our comprehensive event management services.",
     icon: "/events.svg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
   },
   {
-    title: "CORPORATE\nTRAVEL\nMANAGEMENT",
+    title: "CORPORATE TRAVEL MANAGEMENT",
+    description:
+      "Streamlined business travel solutions with cost optimization and policy compliance.",
     icon: "/corporate.svg",
+    image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
   },
 ]
 
 export default function CircularSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   return (
-    <section className="relative bg-[linear-gradient(to_bottom,#EE8900_0%,#EE8900_50%,white_50%,white_100%)] py-24">
+    <section className="relative bg-gradient-to-b from-slate-50 to-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div key={index} className="flex justify-center">
-              <div
-                className="relative w-48 h-48 lg:w-56 lg:h-56"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[25%] w-28 h-28 lg:w-32 lg:h-32 bg-[#5D376E] rounded-full z-0 transition-transform duration-300 ${
-                    hoveredIndex === index ? "scale-0" : "scale-100"
-                  }`}
+            <div
+              key={index}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
+            >
+              <div className="relative h-48 overflow-hidden bg-slate-100">
+                <Image
+                  src={service.image || "/placeholder.svg"}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
 
-                {/* Icon circle (between top violet and main white circle) */}
-                <div
-                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg z-20 flex items-center justify-center"
-                >
-                  <Image 
-                    src={service.icon} 
-                    alt={service.title}
-                    width={40}
-                    height={40}
-                    className="w-10 h-10 lg:w-12 lg:h-12"
-                  />
-                </div>
-
-                <div
-                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 lg:w-48 lg:h-48 bg-white rounded-full shadow-xl z-10 flex items-center justify-center transition-transform duration-300 ${
-                    hoveredIndex === index ? "scale-105" : "scale-100"
-                  }`}
-                >
-                  <h3 className="text-[#EE8900] font-bold text-lg lg:text-xl text-center whitespace-pre-line px-4">
-                    {service.title}
-                  </h3>
-                </div>
-
-                <div
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[25%] w-28 h-28 lg:w-32 lg:h-32 bg-[#5D376E] rounded-full z-0 transition-transform duration-300 ${
-                    hoveredIndex === index ? "scale-0" : "scale-100"
-                  }`}
+              <div className="absolute top-4 left-4 w-14 h-14 bg-white rounded-xl shadow-lg flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-xl z-10">
+                <Image
+                  src={service.icon || "/placeholder.svg"}
+                  alt={service.title}
+                  width={32}
+                  height={32}
+                  className="w-8 h-8"
                 />
               </div>
+
+              <div className="p-6">
+                <h3 className="text-slate-900 font-bold text-lg mb-3 transition-colors duration-300 group-hover:text-orange-600">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>
+              </div>
+
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </div>
           ))}
         </div>
@@ -78,3 +77,4 @@ export default function CircularSection() {
     </section>
   )
 }
+

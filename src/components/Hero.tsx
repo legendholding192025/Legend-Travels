@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { Calendar, MapPin, Users } from "lucide-react"
 import AirportSearch from "@/components/AirportSearch"
 
@@ -26,6 +26,17 @@ const Hero = () => {
   const [guests, setGuests] = useState("")
 
   const popularDestinations = ["Paris", "Tokyo", "New York", "London", "Bali", "Dubai"]
+
+  const inputBaseClasses = useMemo(
+    () =>
+      "w-full h-[46px] rounded-lg border border-gray-300 bg-white pr-4 text-sm shadow-sm outline-none transition focus:border-[#EE8900] focus:ring-2 focus:ring-[#EE8900]/40 font-helvetica",
+    []
+  )
+
+  const getDateInputClasses = useCallback(
+    (value: string) => `${inputBaseClasses} ${value ? "text-gray-900" : "text-gray-500"}`,
+    [inputBaseClasses]
+  )
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -84,7 +95,7 @@ const Hero = () => {
                       onQueryChange={setFrom}
                       onSelect={(_, formatted) => setFrom(formatted)}
                       placeholder="City, airport, or code"
-                      inputClassName="pl-10"
+                      inputClassName={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -100,7 +111,7 @@ const Hero = () => {
                       onQueryChange={setTo}
                       onSelect={(_, formatted) => setTo(formatted)}
                       placeholder="City, airport, or code"
-                      inputClassName="pl-10"
+                      inputClassName={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -109,12 +120,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Departure</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={departure}
                       onChange={(e) => setDeparture(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${getDateInputClasses(departure)}`}
                     />
                   </div>
                 </div>
@@ -123,12 +134,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Return</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={returnDate}
                       onChange={(e) => setReturnDate(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${getDateInputClasses(returnDate)}`}
                     />
                   </div>
                 </div>
@@ -137,13 +148,13 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Passengers</label>
                   <div className="relative">
-                    <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Users className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       placeholder="2 guests"
                       value={passengers}
                       onChange={(e) => setPassengers(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -156,13 +167,13 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Destination</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <MapPin className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       placeholder="Where to?"
                       value={destination}
                       onChange={(e) => setDestination(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -171,12 +182,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Check-in</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${getDateInputClasses(checkIn)}`}
                     />
                   </div>
                 </div>
@@ -185,12 +196,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Check-out</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${getDateInputClasses(checkOut)}`}
                     />
                   </div>
                 </div>
@@ -199,13 +210,13 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Guests</label>
                   <div className="relative">
-                    <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Users className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       placeholder="2 guests"
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -221,13 +232,13 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Pickup Location</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <MapPin className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       placeholder="City or airport"
                       value={from}
                       onChange={(e) => setFrom(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -236,13 +247,13 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Drop Location</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <MapPin className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       placeholder="City or airport"
                       value={to}
                       onChange={(e) => setTo(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className={`pl-10 ${inputBaseClasses} text-gray-900`}
                     />
                   </div>
                 </div>
@@ -251,12 +262,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Pickup Date</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={departure}
                       onChange={(e) => setDeparture(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className="w-full rounded-lg border border-gray-300 bg-white pl-10 pr-4 py-3 text-sm text-gray-900 shadow-sm outline-none transition focus:border-[#EE8900] focus:ring-2 focus:ring-[#EE8900]/40 font-helvetica"
                     />
                   </div>
                 </div>
@@ -265,12 +276,12 @@ const Hero = () => {
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white font-helvetica">Return Date</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <input
                       type="date"
                       value={returnDate}
                       onChange={(e) => setReturnDate(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica text-gray-900"
+                      className="w-full rounded-lg border border-gray-300 bg-white pl-10 pr-4 py-3 text-sm text-gray-900 shadow-sm outline-none transition focus:border-[#EE8900] focus:ring-2 focus:ring-[#EE8900]/40 font-helvetica"
                     />
                   </div>
                 </div>

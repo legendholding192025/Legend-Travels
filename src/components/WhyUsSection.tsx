@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+
 const features = [
   {
     title: "IATA Certified",
@@ -27,7 +29,78 @@ const features = [
   },
 ]
 
+const stats = [
+  {
+    label: "Satisfied Customers",
+    value: 20000,
+    prefix: "+",
+  },
+  {
+    label: "Destination Partners",
+    value: 80,
+    prefix: "+",
+  },
+  {
+    label: "Successful Events",
+    value: 300,
+    prefix: "+",
+  },
+]
+
 function WhyChooseUsComponent() {
+  const [counts, setCounts] = useState(() => stats.map(() => 0))
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const statsRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!statsRef.current || hasAnimated) {
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setHasAnimated(true)
+            observer.disconnect()
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(statsRef.current)
+
+    return () => observer.disconnect()
+  }, [hasAnimated])
+
+  useEffect(() => {
+    if (!hasAnimated) {
+      return
+    }
+
+    const duration = 1500
+    const start = performance.now()
+    let rafId: number
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - start
+      const progress = Math.min(elapsed / duration, 1)
+
+      setCounts(
+        stats.map((stat) => Math.round(stat.value * progress))
+      )
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate)
+      }
+    }
+
+    rafId = requestAnimationFrame(animate)
+
+    return () => cancelAnimationFrame(rafId)
+  }, [hasAnimated])
+
   return (
     <section className="w-full py-16 md:py-24" style={{ backgroundColor: "#5D376E" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,19 +139,19 @@ function WhyChooseUsComponent() {
         </div>
 
         {/* Stats Bar */}
-        <div className="mt-16 grid gap-8 rounded-2xl border border-border bg-secondary/50 p-8 sm:grid-cols-3">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary">+20,000</div>
-            <div className="mt-1 text-sm text-muted-foreground">Satisfied Customers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary">+80</div>
-            <div className="mt-1 text-sm text-muted-foreground">Destination Partners</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary">+300</div>
-            <div className="mt-1 text-sm text-muted-foreground">Successful Events</div>
-          </div>
+        <div
+          ref={statsRef}
+          className="mt-16 grid gap-8 rounded-2xl border border-border bg-secondary/50 p-8 sm:grid-cols-3"
+        >
+          {stats.map((stat, index) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-4xl font-bold text-primary">
+                {stat.prefix}
+                {counts[index].toLocaleString()}
+              </div>
+              <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
