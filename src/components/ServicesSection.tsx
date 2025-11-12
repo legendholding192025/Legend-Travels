@@ -74,15 +74,90 @@ const services = [
   },
 ]
 
-export default function ServicesSection() {
-  const [hoveredService, setHoveredService] = useState<string | null>(null)
+interface ServiceCardProps {
+  service: (typeof services)[number]
+}
 
+function ServiceCard({ service }: ServiceCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <div
+      className="relative overflow-hidden border-0 bg-white hover:bg-gray-50 transition-all duration-500 cursor-pointer rounded-lg shadow-md hover:shadow-lg h-[380px]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="h-full flex flex-col">
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden">
+          <Image
+            src={service.image || "/placeholder.svg"}
+            alt={service.title}
+            fill
+            className={`object-cover transition-transform duration-500 ${
+              isHovered ? "scale-105" : "scale-100"
+            }`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          {/* Icon overlay on image */}
+          <div className={`absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full text-[#EE8900] transition-colors duration-300 ${
+            isHovered ? "text-[#EE8900]/80" : "text-[#EE8900]"
+          }`}>
+            {service.icon}
+          </div>
+        </div>
+
+        <div className="p-6 flex-1 flex flex-col relative">
+          {/* Title */}
+          <h3 className={`text-lg font-medium mb-3 transition-colors duration-300 font-helvetica ${
+            isHovered ? "text-[#EE8900]" : "text-gray-900"
+          }`}>
+            {service.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-grow font-helvetica">
+            {service.description}
+          </p>
+
+          {/* Features */}
+          <div
+            className="space-y-2 overflow-hidden"
+            style={{
+              maxHeight: isHovered ? "120px" : "0px",
+              opacity: isHovered ? 1 : 0,
+              transition: "max-height 0.4s ease-out, opacity 0.3s ease-out"
+            }}
+          >
+            {service.features.map((feature, index) => (
+              <div key={index} className="flex items-center text-xs text-gray-500">
+                <div className="w-1 h-1 bg-[#EE8900] rounded-full mr-2" />
+                {feature}
+              </div>
+            ))}
+          </div>
+
+          {/* Hover indicator */}
+          <div
+            className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#EE8900] to-[#EE8900]/80 transition-all duration-500 ${
+              isHovered ? "w-full" : "w-0"
+            }`}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function ServicesSection() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 text-balance font-helvetica">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 text-balance font-helvetica">
+            Our Services
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto text-pretty font-helvetica">
             We provide comprehensive travel solutions designed to transform your journey into an extraordinary
             experience.
@@ -92,60 +167,7 @@ export default function ServicesSection() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
-            <div
-              key={service.id}
-              className="group relative overflow-hidden border-0 bg-white hover:bg-gray-50 transition-all duration-500 cursor-pointer rounded-lg shadow-md hover:shadow-lg"
-              onMouseEnter={() => setHoveredService(service.id)}
-              onMouseLeave={() => setHoveredService(null)}
-            >
-              <div className="h-full flex flex-col">
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  {/* Icon overlay on image */}
-                  <div className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full text-[#EE8900] group-hover:text-[#EE8900]/80 transition-colors duration-300">
-                    {service.icon}
-                  </div>
-                </div>
-
-                <div className="p-8 flex-1 flex flex-col">
-                  {/* Title */}
-                  <h3 className="text-xl font-medium text-gray-900 mb-4 group-hover:text-[#EE8900] transition-colors duration-300 font-helvetica">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow font-helvetica">{service.description}</p>
-
-                  {/* Features */}
-                  <div
-                    className={`space-y-2 transition-all duration-500 ${
-                      hoveredService === service.id ? "opacity-100 max-h-40" : "opacity-0 max-h-0"
-                    } overflow-hidden`}
-                  >
-                    {service.features.map((feature, index) => (
-                      <div key={index} className="flex items-center text-xs text-gray-500">
-                        <div className="w-1 h-1 bg-[#EE8900] rounded-full mr-2" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Hover indicator */}
-                  <div
-                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#EE8900] to-[#EE8900]/80 transition-all duration-500 ${
-                      hoveredService === service.id ? "w-full" : "w-0"
-                    }`}
-                  />
-                </div>
-              </div>
-            </div>
+            <ServiceCard key={service.id} service={service} />
           ))}
         </div>
       </div>

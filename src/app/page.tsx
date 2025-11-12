@@ -4,6 +4,8 @@ import ServicesSection from '@/components/ServicesSection';
 import PromoBanner from '@/components/PromoBanner';
 import StatsSection from '@/components/StatsSection';
 import WhyUsSection from '@/components/WhyUsSection';
+import CircularSection from '@/components/CircularSection';
+import SpecialtySection from '@/components/SpecialtySection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
@@ -12,10 +14,11 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
-      <ServicesSection />
+      <CircularSection />
       <PromoBanner />
       <StatsSection />
-      <WhyUsSection />
+      <ServicesSection />
+      <WhyUsSection />  
       <ContactSection />
       <Footer />
     </main>

@@ -15,7 +15,12 @@ const Header = () => {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const isHolidaysPage = pathname === '/holidays';
-  const isTransparentPage = isHomePage || isHolidaysPage;
+  const isCorporateEventsPage = pathname === '/corporate-events';
+  const isExhibitionsAndSummitsPage = pathname === '/exhibitions-and-summits';
+  const isCorporateTravelPage = pathname === '/corporate-travel';
+  const isTicketingPage = pathname === '/ticketing';
+  const isContactUsPage = pathname === '/contact-us';
+  const isTransparentPage = isHomePage || isHolidaysPage || isCorporateEventsPage || isExhibitionsAndSummitsPage || isCorporateTravelPage || isTicketingPage || isContactUsPage;
 
   // Helper function for navigation text colors
   const getNavTextColor = () => {
@@ -206,6 +211,13 @@ const Header = () => {
                   >
                     Holidays
                   </Link>
+                  <Link 
+                    href="/corporate-travel" 
+                    className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    Corporate Travel
+                  </Link>
                   <div 
                     className="relative"
                     onMouseEnter={handleEventsMouseEnter}
@@ -221,28 +233,18 @@ const Header = () => {
                       </svg>
                     </button>
                     {isEventsOpen && (
-                      <div className={`absolute left-full top-0 ml-1 w-48 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${getDropdownBg()}`}
+                      <div className={`absolute left-full top-0 ml-1 w-56 rounded-md shadow-lg py-1 z-50 transition-all duration-300 ${getDropdownBg()}`}
                            onMouseEnter={handleEventsMouseEnter}
                            onMouseLeave={handleEventsMouseLeave}>
                         <Link 
-                          href="/exhibitions" 
+                          href="/exhibitions-and-summits" 
                           className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
                           onClick={() => {
                             setIsServicesOpen(false);
                             setIsEventsOpen(false);
                           }}
                         >
-                          Exhibitions
-                        </Link>
-                        <Link 
-                          href="/summits" 
-                          className={`block px-4 py-2 text-sm font-helvetica ${getDropdownTextColor()}`}
-                          onClick={() => {
-                            setIsServicesOpen(false);
-                            setIsEventsOpen(false);
-                          }}
-                        >
-                          Summits
+                          Exhibitions and Summits
                         </Link>
                         <Link 
                           href="/corporate-events" 
@@ -353,6 +355,16 @@ const Header = () => {
                     >
                       Holidays
                     </Link>
+                    <Link 
+                      href="/corporate-travel" 
+                      className="text-gray-600 hover:text-gray-800 block px-3 py-2 text-base font-helvetica"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsServicesOpen(false);
+                      }}
+                    >
+                      Corporate Travel
+                    </Link>
                     <div>
                       <button
                         onClick={() => setIsEventsOpen(!isEventsOpen)}
@@ -366,7 +378,7 @@ const Header = () => {
                       {isEventsOpen && (
                         <div className="pl-4 space-y-1">
                           <Link 
-                            href="/exhibitions" 
+                            href="/exhibitions-and-summits" 
                             className="text-gray-500 hover:text-gray-800 block px-3 py-2 text-sm font-helvetica"
                             onClick={() => {
                               setIsMenuOpen(false);
@@ -374,18 +386,7 @@ const Header = () => {
                               setIsEventsOpen(false);
                             }}
                           >
-                            Exhibitions
-                          </Link>
-                          <Link 
-                            href="/summits" 
-                            className="text-gray-500 hover:text-gray-800 block px-3 py-2 text-sm font-helvetica"
-                            onClick={() => {
-                              setIsMenuOpen(false);
-                              setIsServicesOpen(false);
-                              setIsEventsOpen(false);
-                            }}
-                          >
-                            Summits
+                            Exhibitions and Summits
                           </Link>
                           <Link 
                             href="/corporate-events" 

@@ -28,7 +28,7 @@ const PromoBanner = () => {
               {/* Left Side - Text Content */}
               <div className="flex-1">
                 <div className="space-y-2">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-white font-helvetica">
                     SAINT LUCIA
                   </h2>
                   <p className="text-xl md:text-2xl text-purple-300 font-helvetica font-medium">

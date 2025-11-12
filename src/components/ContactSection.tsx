@@ -66,7 +66,7 @@ const ContactSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 text-balance font-helvetica">Get in Touch</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 text-balance font-helvetica">Get in Touch</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -182,29 +182,13 @@ const ContactSection = () => {
             </form>
           </div>
 
-          {/* Map */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 font-helvetica">Find Us</h3>
-              <p className="text-gray-600 mb-8 font-helvetica">
-                Visit our office or get directions to our location.
-              </p>
-            </div>
-
-            {/* Map Container */}
-            <div className="bg-gray-200 rounded-lg shadow-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368459418!3d40.71312997933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007%2C%20USA!5e0!3m2!1sen!2sus!4v1625073982818!5m2!1sen!2sus"
-                width="100%"
-                height="500"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Legend Travels Office Location"
-              />
-            </div>
-
+          {/* Image Section */}
+          <div className="bg-gray-200 rounded-lg shadow-lg overflow-hidden">
+            <img
+              src="https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp"
+              alt="Legend Travels Office"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>

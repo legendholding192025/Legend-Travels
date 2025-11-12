@@ -1,100 +1,91 @@
 "use client"
 
-import { useState } from "react"
-
 const features = [
   {
-    id: "expertise",
-    // title: "IATA Certified",
-    // description: "With over two decades of experience in the travel industry, we've built a reputation for delivering exceptional service and unforgettable experiences.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    stats: "IATA Certified"
+    title: "IATA Certified",
+    description: "Official certification ensuring industry compliance and quality standards",
+    bgImage: "https://cdn.legendholding.com/images/cdn_68fb6b87e26cf5.43301910_20251024_120527.webp",
+    iconSrc: "/12.svg",
   },
   {
-    id: "global",
-    // title: "95% Satisfaction Rate",
-    // description: "Our extensive worldwide network ensures you have access to the best accommodations, experiences, and local insights wherever you travel.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    stats: "95% Satisfaction Rate"
+    title: "95% Satisfaction Rate",
+    description: "Consistently exceeding client expectations with proven results",
+    bgImage: "https://cdn.legendholding.com/images/cdn_68fb6ba704e459.11634108_20251024_120559.webp",
+    iconSrc: "/13.svg",
   },
   {
-    id: "support",
-    // title: "24/7 Support",
-    // description: "Our dedicated team is available around the clock to assist you with any travel needs, ensuring peace of mind throughout your journey.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
-      </svg>
-    ),
-    stats: "Diversified Teams with Regional Offices"
+    title: "Diversified Teams with Regional Offices",
+    description: "Global presence with local expertise across multiple continents",
+    bgImage: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
+    iconSrc: "/14.svg",
   },
   {
-    id: "satisfaction",
-    // title: "98% Satisfaction",
-    // description: "Our commitment to excellence is reflected in our high customer satisfaction rate, with travelers consistently rating our services as outstanding.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    ),
-    stats: "Part of Legend Holding"
-  }
+    title: "Part of Legend Holding",
+    description: "Backed by a trusted international corporate group",
+    bgImage: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
+    iconSrc: "/15.svg",
+  },
 ]
 
-export default function WhyUsSection() {
-  const [hoveredFeature, setHoveredFeature] = useState<string | null>(null)
-
+function WhyChooseUsComponent() {
   return (
-    <section className="py-24" style={{ backgroundColor: '#5D376E' }}>
+    <section className="w-full py-16 md:py-24" style={{ backgroundColor: "#5D376E" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-white mb-6 text-balance font-helvetica">WHY US</h2>
+        {/* Heading */}
+        <div className="mb-12 text-center">
+          <h2 className="text-balance text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+            Why Choose Us
+          </h2>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => (
             <div
-              key={feature.id}
-              className="group relative overflow-hidden border-0 bg-white/10 hover:bg-white/20 transition-all duration-500 cursor-pointer rounded-lg shadow-md hover:shadow-lg"
-              onMouseEnter={() => setHoveredFeature(feature.id)}
-              onMouseLeave={() => setHoveredFeature(null)}
+              key={index}
+              className="group relative overflow-hidden rounded-xl border border-border shadow-sm transition-all hover:shadow-lg hover:border-primary/50"
             >
-              <div className="h-full flex flex-col p-8 text-center">
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 mx-auto transition-colors duration-300 ${
-                  hoveredFeature === feature.id 
-                    ? "bg-[#EE8900] text-white" 
-                    : "bg-white/20 text-white"
-                }`}>
-                  {feature.icon}
-                </div>
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(${feature.bgImage})` }}
+              />
 
-                {/* Stats */}
-                <div className="text-3xl font-bold text-white mb-2 font-helvetica">
-                  {feature.stats}
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />
 
-                {/* Hover indicator */}
-                <div
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#EE8900] to-[#EE8900]/80 transition-all duration-500 ${
-                    hoveredFeature === feature.id ? "w-full" : "w-0"
-                  }`}
-                />
+              <div className="relative p-6">
+                <div className="mb-4 inline-flex items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm p-3 transition-colors group-hover:bg-white/30">
+                  <img src={feature.iconSrc} alt="" className="h-8 w-8" />
+                </div>
+                <h3 className="text-balance mb-2 text-xl font-semibold text-white">{feature.title}</h3>
+                <p className="text-pretty text-sm leading-relaxed text-white/90">{feature.description}</p>
+
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-accent to-primary transition-all duration-500 ease-in-out group-hover:w-full" />
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Stats Bar */}
+        <div className="mt-16 grid gap-8 rounded-2xl border border-border bg-secondary/50 p-8 sm:grid-cols-3">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary">+20,000</div>
+            <div className="mt-1 text-sm text-muted-foreground">Satisfied Customers</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary">+80</div>
+            <div className="mt-1 text-sm text-muted-foreground">Destination Partners</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary">+300</div>
+            <div className="mt-1 text-sm text-muted-foreground">Successful Events</div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
+
+const WhyChooseUs = WhyChooseUsComponent
+
+export { WhyChooseUs }
+export default WhyChooseUsComponent

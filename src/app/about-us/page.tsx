@@ -330,7 +330,7 @@ export default function AboutUsPage() {
                 {/* Our Story Content */}
                 <div className="order-1 lg:order-1 z-10 relative">
                   <div className="mb-8">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#F3A13B] mb-8 font-richmond leading-tight">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[#F3A13B] mb-8 font-richmond leading-tight">
                       Our Story
                     </h2>
                   </div>
@@ -382,7 +382,7 @@ export default function AboutUsPage() {
                 {/* Vision Content */}
                 <div className="order-1 lg:order-1">
                   <div className="mb-8">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#F08900] mb-8 font-richmond leading-tight">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[#F08900] mb-8 font-richmond leading-tight">
                       Our Vision
                     </h2>
                   </div>
@@ -478,7 +478,7 @@ export default function AboutUsPage() {
             <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center min-h-[600px] px-4 md:px-6 lg:px-8 z-10">
               {/* Mission Content */}
               <div className="order-1 lg:order-1 py-16 lg:py-24 pr-0 lg:pr-12">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-6 font-richmond leading-tight text-left">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 font-richmond leading-tight text-left">
                   Our Mission
                 </h2>
                 <p className="text-base md:text-lg font-effra leading-relaxed mb-10 text-[#5D376E] text-left max-w-xl">
@@ -525,7 +525,7 @@ export default function AboutUsPage() {
             <div className="max-w-7xl mx-auto">
               {/* Section Header */}
               <div className="text-center mb-10">
-                <h2 className="text-4xl md:text-5xl font-richmond text-[#2C2341] mb-4">Our Core Values</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold font-richmond text-[#2C2341] mb-4">Our Core Values</h2>
                 <p className="text-lg text-[#2C2341] font-effra max-w-2xl mx-auto">
                   Are the principles that guide every decision and action we take.
                 </p>

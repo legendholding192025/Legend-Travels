@@ -1,16 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import ContactSection from "@/components/ContactSection"
+import PromoBanner from "@/components/PromoBanner"
+import TravelCollage from "@/components/TravelCollage"
 
 // Icon components
-const Search = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-  </svg>
-)
-
 const MapPin = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -45,6 +43,53 @@ export default function HolidaysPage() {
   const [checkIn, setCheckIn] = useState("")
   const [checkOut, setCheckOut] = useState("")
   const [guests, setGuests] = useState("2 guests")
+
+  // Carousel state
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const destinations = [
+    {
+      country: "KENYA",
+      title: "KENYA SAFARIS BY ROAD",
+      price: "9000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fcd211d69459.09801331_20251025_133513.webp",
+    },
+    {
+      country: "JORDAN",
+      title: "LOREM IPSUM",
+      price: "1000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fcd1e63233b8.71394110_20251025_133430.webp",
+    },
+    {
+      country: "CHINA",
+      title: "LOREM IPSUM",
+      price: "9000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fcd19cac0a18.81136205_20251025_133316.webp",
+    },
+    {
+      country: "JAPAN",
+      title: "LOREM IPSUM",
+      price: "8000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp",
+    },
+    {
+      country: "BALI",
+      title: "LOREM IPSUM",
+      price: "5000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
+    },
+    {
+      country: "MALDIVES",
+      title: "LOREM IPSUM",
+      price: "12000 AED",
+      image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
+    },
+  ]
+
+  const groupedDestinations = []
+  for (let i = 0; i < destinations.length; i += 3) {
+    groupedDestinations.push(destinations.slice(i, i + 3))
+  }
 
   const tabs = [
     { id: "flights", label: "Flights" },
@@ -81,18 +126,19 @@ export default function HolidaysPage() {
           appearance: none;
         }
       `}</style>
-      <Header />
       <main className="overflow-x-hidden">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24 pt-24">
-          {/* Fallback background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600" />
-          {/* Background Image */}
+        {/* Header + Hero wrapper with background behind transparent header */}
+        <div className="relative -mt-24 pt-24 min-h-screen overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 -z-10" />
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
             style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp')`,
+              backgroundImage:
+                "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp')",
             }}
           />
+          <Header />
+          <section className="relative min-h-screen flex items-center justify-center">
 
           {/* Hero Content */}
           <div className="relative z-10 flex flex-col items-center justify-center px-6 py-20 w-full max-w-6xl mx-auto">
@@ -397,138 +443,156 @@ export default function HolidaysPage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </div>
 
         {/* Popular Destinations Section */}
         <section className="bg-[#3d2b5c] py-16 px-6">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-white text-4xl md:text-5xl font-bold text-center mb-12 tracking-wide">
-              POPULAR DESTINATION
+            <h2 className="text-white text-3xl sm:text-4xl font-bold text-center mb-12 tracking-wide">
+              Popular Destinations
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  country: "KENYA",
-                  title: "KENYA SAFARIS BY ROAD",
-                  price: "9000 AED",
-                  image: "https://cdn.legendholding.com/images/cdn_68fcd211d69459.09801331_20251025_133513.webp",
-                },
-                {
-                  country: "JORDAN",
-                  title: "LOREM IPSUM",
-                  price: "1000 AED",
-                  image: "https://cdn.legendholding.com/images/cdn_68fcd1e63233b8.71394110_20251025_133430.webp",
-                },
-                {
-                  country: "CHINA",
-                  title: "LOREM IPSUM",
-                  price: "9000 AED",
-                  image: "https://cdn.legendholding.com/images/cdn_68fcd19cac0a18.81136205_20251025_133316.webp",
-                },
-              ].map((destination, index) => (
-                <div key={index} className="relative rounded-3xl overflow-hidden h-[450px] group">
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={destination.image}
-                      alt={destination.country}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {groupedDestinations.map((group, groupIndex) => (
+                    <div key={groupIndex} className="min-w-full px-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {group.map((dest, idx) => (
+                          <div key={idx} className="relative rounded-3xl overflow-hidden h-[450px] group">
+                            {/* Background Image */}
+                            <div className="absolute inset-0">
+                              <img
+                                src={dest.image}
+                                alt={dest.country}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
 
-                  {/* Country Label */}
-                  <div className="absolute top-0 left-0 bg-[#6b4d8a] text-white px-6 py-3 text-lg font-semibold tracking-wide">
-                    {destination.country}
-                  </div>
+                            {/* Country Label */}
+                            <div className="absolute top-0 left-0 bg-[#6b4d8a] text-white px-6 py-3 text-lg font-semibold tracking-wide">
+                              {dest.country}
+                            </div>
 
-                  {/* Bottom Card */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-white rounded-tr-[3rem] p-6 flex items-end justify-between">
-                    <div>
-                      <h3 className="text-black text-xl font-bold mb-1 leading-tight">{destination.title}</h3>
+                            {/* Bottom Card */}
+                            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-tr-[3rem] p-6 flex items-end justify-between">
+                              <div>
+                                <h3 className="text-black text-xl font-bold mb-1 leading-tight">{dest.title}</h3>
+                              </div>
+                              <div className="text-right flex flex-col items-end">
+                                <span className="text-orange-500 text-sm font-medium">Starting</span>
+                                <span className="text-[#6b4d8a] text-2xl font-bold whitespace-nowrap">{dest.price}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="text-right flex flex-col items-end">
-                      <span className="text-orange-500 text-sm font-medium">Starting</span>
-                      <span className="text-[#6b4d8a] text-2xl font-bold whitespace-nowrap">{destination.price}</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={() => setCurrentSlide((prev) => (prev === 0 ? groupedDestinations.length - 1 : prev - 1))}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+                aria-label="Previous slide"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setCurrentSlide((prev) => (prev === groupedDestinations.length - 1 ? 0 : prev + 1))}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+                aria-label="Next slide"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center mt-8 gap-2">
+                {groupedDestinations.map((_, dot) => (
+                  <button
+                    key={dot}
+                    onClick={() => setCurrentSlide(dot)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentSlide === dot ? "bg-white w-8" : "bg-white/50"
+                    }`}
+                    aria-label={`Go to slide ${dot + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Travel Collage Section */}
-        <section className="relative min-h-screen bg-[#6B4C8A] py-20 px-8 overflow-hidden">
-          <div className="max-w-[1400px] mx-auto">
-            <div className="relative h-[600px]">
+        <TravelCollage />
+
+        {/* Why Choose Us Section */}
+        <section className="py-24 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16 animate-fade-in-up">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-balance">Why Us</h2>
+            </div>
+
+
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: "NATURE",
-                  image: "https://res.cloudinary.com/dzfhqvxnf/image/upload/v1761120794/cdn_6862a6e1eef048.35976175_20250630_150153_zzb2ar.jpg",
-                  rotation: "rotate-[-4deg]",
-                  position: "top-0 left-0 z-10",
-                  size: "w-[280px] h-[350px]",
+                  title: "Expert Guides",
+                  description: "Travel with experienced local guides who know every hidden gem",
+                  image: "https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp",
                 },
                 {
-                  title: "CITIES",
-                  image: "https://res.cloudinary.com/dzfhqvxnf/image/upload/v1761120728/cdn_6862aedc3ac7d3.80278555_20250630_153556_o8i9jv.png",
-                  rotation: "rotate-[2deg]",
-                  position: "top-20 left-[240px] z-20",
-                  size: "w-[280px] h-[420px]",
-                  labelPosition: "top-0 right-[-220px]",
+                  title: "Best Destinations",
+                  description: "Curated locations that offer unforgettable experiences",
+                  image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
                 },
                 {
-                  title: "HERITAGE",
-                  image: "https://res.cloudinary.com/dzfhqvxnf/image/upload/v1761120674/cdn_68831dafb50c56.86321986_20250725_060119_uwrksc.png",
-                  rotation: "rotate-[-3deg]",
-                  position: "top-0 left-[520px] z-10",
-                  size: "w-[280px] h-[350px]",
+                  title: "Seamless Planning",
+                  description: "From booking to departure, we handle every detail for you",
+                  image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
                 },
-                {
-                  title: "ADVENTURE",
-                  image: "https://res.cloudinary.com/dzfhqvxnf/image/upload/v1761120794/cdn_6862a6e1eef048.35976175_20250630_150153_zzb2ar.jpg",
-                  rotation: "rotate-[3deg]",
-                  position: "top-20 left-[760px] z-20",
-                  size: "w-[280px] h-[420px]",
-                  labelPosition: "top-0 right-[-240px]",
-                },
-                {
-                  title: "FAMILY",
-                  image: "https://res.cloudinary.com/dzfhqvxnf/image/upload/v1761120728/cdn_6862aedc3ac7d3.80278555_20250630_153556_o8i9jv.png",
-                  rotation: "rotate-[-2deg]",
-                  position: "top-0 left-[1040px] z-10",
-                  size: "w-[280px] h-[350px]",
-                },
-              ].map((category, index) => (
+              ].map((feature, index) => (
                 <div
-                  key={category.title}
-                  className={`absolute ${category.position} ${category.rotation} transition-transform hover:scale-105 hover:z-30`}
+                  key={index}
+                  className="group relative overflow-hidden rounded-xl bg-white border border-gray-200 hover:shadow-2xl transition-all duration-500 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  {/* Photo with white border (polaroid style) */}
-                  <div className={`${category.size} bg-white p-4 shadow-2xl`}>
-                    <div className="relative w-full h-full overflow-hidden">
-                      <img
-                        src={category.image}
-                        alt={category.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={feature.image || "/placeholder.svg"}
+                      alt={feature.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
-                  {/* Label */}
-                  <div
-                    className={`absolute ${
-                      category.labelPosition || "bottom-[-30px] left-1/2 -translate-x-1/2"
-                    } bg-[#4A3564] px-8 py-3 shadow-lg`}
-                  >
-                    <h3 className="text-white text-xl font-semibold tracking-wider">{category.title}</h3>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                   </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-orange-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                 </div>
               ))}
             </div>
           </div>
         </section>
+        <PromoBanner />
+        <ContactSection />
       </main>
       <Footer />
     </>

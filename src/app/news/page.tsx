@@ -425,7 +425,7 @@ export default function NewsPage() {
             {/* All News */}
             <div>
               <div className="mb-6">
-                <h2 className="text-2xl font-bold">All News</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold">All News</h2>
               </div>
 
               {currentArticles.length === 0 ? (
