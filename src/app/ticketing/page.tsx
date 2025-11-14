@@ -1,14 +1,26 @@
 "use client";
-import Header from '@/components/Header';
-import { useCallback, useMemo, useState } from 'react';
-import Footer from '@/components/Footer';
-import ContactSection from '@/components/ContactSection';
-import AirportSearch from '@/components/AirportSearch';
-import WhyUsSection from '@/components/WhyUsSection';
-import type { WhyUsFeature, WhyUsStat } from '@/components/WhyUsSection';
-import { MapPin } from 'lucide-react';
+import Header from "@/components/Header";
+import { useCallback, useMemo, useState } from "react";
+import Footer from "@/components/Footer";
+import ContactSection from "@/components/ContactSection";
+import AirportSearch from "@/components/AirportSearch";
+import WhyUsSection from "@/components/WhyUsSection";
+import { MapPin } from "lucide-react";
 
-const ticketingFeatures: WhyUsFeature[] = [
+type TicketingWhyUsFeature = {
+  title: string;
+  description: string;
+  bgImage: string;
+  iconSrc: string;
+};
+
+type TicketingWhyUsStat = {
+  label: string;
+  value: number;
+  prefix?: string;
+};
+
+const ticketingFeatures: TicketingWhyUsFeature[] = [
   {
     title: "IATA Certified",
     description: "Official certification ensuring industry compliance and quality standards.",
@@ -33,9 +45,9 @@ const ticketingFeatures: WhyUsFeature[] = [
     bgImage: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
     iconSrc: "/15.svg",
   },
-] ;
+];
 
-const ticketingStats: WhyUsStat[] = [
+const ticketingStats: TicketingWhyUsStat[] = [
   {
     label: "Satisfied Customers",
     value: 20000,
@@ -51,7 +63,7 @@ const ticketingStats: WhyUsStat[] = [
     value: 300,
     prefix: "+",
   },
-] ;
+];
 
 export default function TicketingPage() {
   const [from, setFrom] = useState("");
