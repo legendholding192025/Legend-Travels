@@ -95,7 +95,8 @@ input[type="date"] {
 }
 
 .animate-scroll-horizontal {
-  animation: scroll-horizontal 30s linear infinite;
+  animation: scroll-horizontal 12s linear infinite;
+  will-change: transform;
 }
 
 .animate-scroll-horizontal:hover {

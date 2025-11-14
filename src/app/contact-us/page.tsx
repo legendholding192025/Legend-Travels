@@ -105,9 +105,9 @@ export default function ContactPage() {
                 <div className="w-12 h-12 bg-[#5D376E] rounded-lg flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-sm text-gray-600 font-helvetica">Email</p>
-                  <p className="font-semibold text-gray-900 font-helvetica">leisure@legendtravels.com</p>
+                  <p className="font-semibold text-gray-900 font-helvetica break-words">leisure@legendtravels.com</p>
                 </div>
               </div>
 
@@ -273,7 +273,7 @@ export default function ContactPage() {
               <div className="lg:col-span-2">
                 <div className="relative h-[500px] rounded-lg overflow-hidden shadow-lg">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1234567890!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69b9b0e5d8b5%3A0x1234567890abcdef!2sDubai%20Investment%20Park!5e0!3m2!1sen!2sae!4v1234567890123!5m2!1sen!2sae"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.0000000000!2d55.1726831!3d24.9978314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f615ac4a1c607%3A0xade3d2df27e4d9ab!2sLegend%20World%20Travel%20%26%20Tourism%20-%20Office%20601%20Bayan%20Business%20Center%20Dubai%20Investment%20Park%201%20-%20Dubai!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -282,6 +282,7 @@ export default function ContactPage() {
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Legend Travels Office Location"
                   />
+
                 </div>
               </div>
               <div className="space-y-6">

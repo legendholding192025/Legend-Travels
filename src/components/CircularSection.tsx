@@ -42,7 +42,9 @@ export default function CircularSection() {
     <section className="relative bg-gradient-to-b from-slate-50 to-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 text-balance font-helvetica">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-balance font-helvetica" style={{ color: '#EE8900' }}>
+            Our Services
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
@@ -72,7 +74,9 @@ export default function CircularSection() {
               </div>
 
               <div className="p-6">
-                <h3 className="text-slate-900 font-bold text-lg mb-3 transition-colors duration-300 group-hover:text-orange-600">
+                <h3
+                  className="text-[#2B1C48] font-bold text-lg mb-3 transition-colors duration-300 group-hover:text-[#EE8900]"
+                >
                   {service.title}
                 </h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>

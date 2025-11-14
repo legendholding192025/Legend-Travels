@@ -66,7 +66,7 @@ const ContactSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 text-balance font-helvetica">Get in Touch</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-balance font-helvetica" style={{ color: "#2B1C48" }}>Get in Touch</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -110,15 +110,28 @@ const ContactSection = () => {
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2 font-helvetica">
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
-                  placeholder="+1 (555) 123-4567"
-                />
+                <div className="flex w-full">
+                  <div className="flex items-center px-3 py-2 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 font-helvetica flex-shrink-0">
+                    <span className="text-gray-700 font-medium whitespace-nowrap">+971</span>
+                  </div>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+                      setFormData({ ...formData, phone: value });
+                    }}
+                    maxLength={9}
+                    inputMode="numeric"
+                    className="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
+                    placeholder="50 123 4567"
+                  />
+                </div>
+                <p className={`mt-1 text-xs font-helvetica ${formData.phone && formData.phone.length < 9 ? 'text-gray-500' : 'text-transparent'}`}>
+                  Enter 9 digits
+                </p>
               </div>
 
               <div>
@@ -183,7 +196,7 @@ const ContactSection = () => {
           </div>
 
           {/* Image Section */}
-          <div className="bg-gray-200 rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <img
               src="https://cdn.legendholding.com/images/cdn_69158cb4e11f50.53536287_20251113_074556.webp"
               alt="Legend Travels Office"

@@ -22,35 +22,35 @@ const destinations: Destination[] = [
   {
     slug: "jordan",
     country: "JORDAN",
-    title: "LOREM IPSUM",
+    title: "WONDERS OF JORDAN",
     price: "1000 AED",
     image: "https://cdn.legendholding.com/images/cdn_68fcd1e63233b8.71394110_20251025_133430.webp",
   },
   {
     slug: "china",
     country: "CHINA",
-    title: "LOREM IPSUM",
+    title: "ENCHANTING CHINA TOURS",
     price: "9000 AED",
     image: "https://cdn.legendholding.com/images/cdn_68fcd19cac0a18.81136205_20251025_133316.webp",
   },
   {
     slug: "japan",
     country: "JAPAN",
-    title: "LOREM IPSUM",
+    title: "DISCOVER JAPAN: LAND OF THE RISING SUN",
     price: "8000 AED",
     image: "https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp",
   },
   {
     slug: "bali",
     country: "BALI",
-    title: "LOREM IPSUM",
+    title: "BALI DREAM ESCAPE",
     price: "5000 AED",
     image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
   },
   {
     slug: "maldives",
     country: "MALDIVES",
-    title: "LOREM IPSUM",
+    title: "MALDIVES LUXURY RETREAT",
     price: "12000 AED",
     image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
   },
@@ -101,7 +101,7 @@ export default function PopularDestinations() {
                           {/* Bottom Card */}
                           <div className="absolute bottom-0 left-0 right-0 bg-white rounded-tr-[3rem] p-6 flex items-end justify-between">
                             <div>
-                              <h3 className="text-black text-xl font-bold mb-1 leading-tight">{dest.title}</h3>
+                              <h3 className="text-[#2B1C48] text-xl font-bold mb-1 leading-tight">{dest.title}</h3>
                             </div>
                             <div className="text-right flex flex-col items-end">
                               <span className="text-orange-500 text-sm font-medium">Starting</span>

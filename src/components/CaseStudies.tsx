@@ -55,15 +55,15 @@ const caseStudies = [
 
 export default function CaseStudies() {
   return (
-    <section className="py-24 px-4 md:px-6 lg:px-8 overflow-hidden bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 bg-gray-50 w-full">
+      <div className="w-full">
         {/* Header */}
-        <div className="text-center mb-16">
-        <h2 className="text-center text-3xl sm:text-4xl font-bold text-orange-500 mb-12 md:mb-16">Case Studies</h2>
+        <div className="text-center mb-16 px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-orange-500 mb-12 md:mb-16 font-helvetica">Case Studies</h2>
         </div>
 
-        <div className="relative">
-          {/* Scrolling Container */}
+        {/* Scrolling Container - Full Width */}
+        <div className="relative w-full overflow-hidden">
           <div className="flex gap-8 animate-scroll-horizontal">
             {/* First set of cards */}
             {caseStudies.map((study) => (
@@ -150,4 +150,3 @@ export default function CaseStudies() {
     </section>
   )
 }
-
