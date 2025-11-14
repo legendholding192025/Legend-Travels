@@ -8,6 +8,7 @@ import CircularSection from '@/components/CircularSection';
 import SpecialtySection from '@/components/SpecialtySection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import PopularDestinations from '@/components/holidays/PopularDestinations';
 
 export default function Home() {
   return (
@@ -16,8 +17,9 @@ export default function Home() {
       <Hero />
       <CircularSection />
       <PromoBanner />
+      <PopularDestinations />
       {/* <StatsSection /> */}
-      <ServicesSection />
+      {/* <ServicesSection /> */}
       <WhyUsSection />  
       <ContactSection />
       <Footer />

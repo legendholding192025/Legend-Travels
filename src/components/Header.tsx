@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -10,8 +10,8 @@ const Header = () => {
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const lastScrollYRef = useRef(0);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const isHolidaysPage = pathname === '/holidays';
@@ -99,25 +99,37 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
       
       // Check if scrolled past a threshold
       setIsScrolled(currentScrollY > 50);
       
       // Determine scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
-        setIsScrollingUp(false);
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up
+      if (currentScrollY < lastScrollY) {
+        // Scrolling up - show header
         setIsScrollingUp(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down - hide header if scrolled past 100px
+        if (currentScrollY > 100) {
+          setIsScrollingUp(false);
+        } else {
+          // If near top but scrolling down, keep header visible
+          setIsScrollingUp(true);
+        }
       }
       
-      setLastScrollY(currentScrollY);
+      // If at the very top (within 10px), keep header transparent (isScrollingUp doesn't matter at top)
+      // But we still want to track scroll direction for when user scrolls down
+      
+      lastScrollYRef.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Cleanup timeouts on unmount
   useEffect(() => {
@@ -132,12 +144,12 @@ const Header = () => {
     <header 
       className={`sticky top-0 z-50 border-b-4 transition-all duration-300 ${
         isTransparentPage 
-          ? (isScrolled && isScrollingUp 
+          ? (!isScrolled 
+              ? 'bg-transparent' 
+              : isScrollingUp 
               ? 'bg-white shadow-lg' 
-              : isScrolled 
-              ? 'bg-transparent -translate-y-full' 
-              : 'bg-transparent')
-          : (isScrolled && isScrollingUp 
+              : 'bg-transparent -translate-y-full')
+          : (isScrollingUp 
               ? 'bg-white shadow-lg' 
               : isScrolled 
               ? 'bg-white shadow-lg -translate-y-full' 
@@ -152,7 +164,7 @@ const Header = () => {
             <Link href="/" className="flex items-center">
               <img 
                 src={isTransparentPage 
-                  ? (isScrolled && isScrollingUp ? "/logo/travel.svg" : "/logo/travel 2.svg")
+                  ? (isScrollingUp ? "/logo/travel.svg" : "/logo/travel 2.svg")
                   : "/logo/travel.svg"
                 } 
                 alt="Legend Travels" 

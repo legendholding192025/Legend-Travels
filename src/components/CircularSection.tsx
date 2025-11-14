@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 
 const services = [
   {
@@ -9,12 +10,14 @@ const services = [
       "Discover your perfect getaway with curated holiday packages and expert travel planning.",
     icon: "/holidays.svg",
     image: "https://cdn.legendholding.com/images/cdn_68fb6b87e26cf5.43301910_20251024_120527.webp",
+    href: "/holidays",
   },
   {
     title: "TICKETING",
     description: "Seamless booking experience for flights, trains, and events worldwide.",
     icon: "/ticketing.svg",
     image: "https://cdn.legendholding.com/images/cdn_68fb6ba704e459.11634108_20251024_120559.webp",
+    href: "/ticketing",
   },
   {
     title: "EVENTS",
@@ -22,6 +25,7 @@ const services = [
       "Create unforgettable experiences with our comprehensive event management services.",
     icon: "/events.svg",
     image: "https://cdn.legendholding.com/images/cdn_68fb6bf2721ac2.99553463_20251024_120714.webp",
+    href: "/corporate-events",
   },
   {
     title: "CORPORATE TRAVEL MANAGEMENT",
@@ -29,6 +33,7 @@ const services = [
       "Streamlined business travel solutions with cost optimization and policy compliance.",
     icon: "/corporate.svg",
     image: "https://cdn.legendholding.com/images/cdn_68fb6c11b820c8.33819064_20251024_120745.webp",
+    href: "/corporate-travel",
   },
 ]
 
@@ -36,11 +41,15 @@ export default function CircularSection() {
   return (
     <section className="relative bg-gradient-to-b from-slate-50 to-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 text-balance font-helvetica">Our Services</h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div
+            <Link
               key={index}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
+              href={service.href}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer block"
             >
               <div className="relative h-48 overflow-hidden bg-slate-100">
                 <Image
@@ -70,7 +79,7 @@ export default function CircularSection() {
               </div>
 
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -17,7 +17,7 @@ export default function SpecialtySection() {
   return (
     <section className="bg-[#2d2550] py-16 px-4 md:py-24">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-[0.3em] text-white mb-12 md:mb-16">Specialty</h2>
+        <h2 className="text-center text-3xl sm:text-4xl font-bold text-white mb-12 md:mb-16">Specialty</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
           {specialties.map((specialty) => (

@@ -5,6 +5,7 @@ import StatsSection from '@/components/StatsSection'
 import ProcessDiagram from '@/components/ProcessDiagram'
 import CaseStudies from '@/components/CaseStudies'
 import ContactSection from '@/components/ContactSection'
+import WhyUsSection from '@/components/WhyUsSection'
 
 export default function CorporateEventsPage() {
   return (
@@ -37,7 +38,7 @@ export default function CorporateEventsPage() {
       </section>
 
       <SpecialtySection/>
-      <StatsSection/>
+      <WhyUsSection/>
       
       {/* Process Diagram Section */}
       <section className="py-16 bg-white">

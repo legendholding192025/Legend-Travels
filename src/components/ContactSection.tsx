@@ -185,7 +185,7 @@ const ContactSection = () => {
           {/* Image Section */}
           <div className="bg-gray-200 rounded-lg shadow-lg overflow-hidden">
             <img
-              src="https://cdn.legendholding.com/images/cdn_68fcd006ae4fc9.31319454_20251025_132630.webp"
+              src="https://cdn.legendholding.com/images/cdn_69158cb4e11f50.53536287_20251113_074556.webp"
               alt="Legend Travels Office"
               className="w-full h-full object-cover"
             />

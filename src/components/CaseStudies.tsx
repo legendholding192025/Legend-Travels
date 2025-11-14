@@ -59,7 +59,7 @@ export default function CaseStudies() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-        <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-[0.3em] text-orange-500 mb-12 md:mb-16">Case Studies</h2>
+        <h2 className="text-center text-3xl sm:text-4xl font-bold text-orange-500 mb-12 md:mb-16">Case Studies</h2>
         </div>
 
         <div className="relative">
