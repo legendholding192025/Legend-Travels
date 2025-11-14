@@ -66,7 +66,6 @@ export default function TravelCollage() {
                   </p>
                 </div>
                 {/* Decorative Element */}
-                <div className="absolute top-6 right-6 w-12 h-12 border-2 border-white/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>
           ))}
