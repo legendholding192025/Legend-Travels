@@ -179,5 +179,5 @@ function WhyChooseUsComponent({ features = defaultFeatures, stats = defaultStats
 
 const WhyChooseUs = WhyChooseUsComponent
 
-export { WhyChooseUs, type WhyUsFeature, type WhyUsStat }
+export { WhyChooseUs }
 export default WhyChooseUsComponent
