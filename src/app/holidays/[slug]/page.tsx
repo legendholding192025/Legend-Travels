@@ -330,26 +330,10 @@ export default function DestinationDetailPage() {
   const params = useParams()
   const slug = params?.slug as string
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-
-  const destination = destinations.find((dest) => dest.slug === slug)
-
-  if (!destination) {
-    return (
-      <main className="min-h-screen">
-        <Header />
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Destination Not Found</h1>
-            <p className="text-gray-600">The destination you're looking for doesn't exist.</p>
-          </div>
-        </div>
-        <Footer />
-      </main>
-    )
-  }
-
   const [activeTab, setActiveTab] = useState("overview")
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+
+  const destination = destinations.find((dest) => dest.slug === slug)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -363,6 +347,21 @@ export default function DestinationDetailPage() {
 
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  if (!destination) {
+    return (
+      <main className="min-h-screen">
+        <Header />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Destination Not Found</h1>
+            <p className="text-gray-600">The destination you&apos;re looking for doesn&apos;t exist.</p>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-white">

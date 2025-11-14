@@ -83,7 +83,7 @@ export default function ContactPage() {
           </div>
           <div className="relative z-10 text-center text-white px-4">
             <h1 className="text-5xl md:text-7xl font-bold mb-4 font-helvetica">Get in Touch</h1>
-            <p className="text-xl md:text-2xl font-light tracking-wide font-helvetica">Let's plan your next adventure together</p>
+            <p className="text-xl md:text-2xl font-light tracking-wide font-helvetica">Let&apos;s plan your next adventure together</p>
           </div>
         </section>
 
@@ -280,7 +280,7 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-helvetica" style={{ color: "#2B1C48" }}>Visit Our Office</h2>
-              <p className="text-gray-600 text-lg font-helvetica">Come meet our team and let's plan your dream vacation together</p>
+              <p className="text-gray-600 text-lg font-helvetica">Come meet our team and let&apos;s plan your dream vacation together</p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">

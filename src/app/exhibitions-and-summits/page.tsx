@@ -50,7 +50,7 @@ export default function ExhibitionsAndSummitsPage() {
                 Our comprehensive event management services ensure seamless execution from planning to completion.
               </p>
               <p className="text-lg text-gray-700 mb-4 font-helvetica">
-                Whether you're organizing a trade show, industry summit, or international exhibition, 
+                Whether you&apos;re organizing a trade show, industry summit, or international exhibition, 
                 our expert team handles every detail to deliver outstanding results.
               </p>
             </div>
