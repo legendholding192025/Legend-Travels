@@ -60,6 +60,8 @@ export default function TicketingPage() {
   const [returnDate, setReturnDate] = useState("");
   const [passengers, setPassengers] = useState(1);
 
+  const popularDestinations = ["Paris", "Tokyo", "New York", "London", "Bali", "Dubai"];
+
   const inputBaseClasses = useMemo(
     () =>
       "w-full h-[46px] rounded-lg border border-gray-300 bg-white pr-4 text-sm shadow-sm outline-none transition focus:ring-2 focus:ring-blue-500 focus:border-transparent font-helvetica",
@@ -251,6 +253,23 @@ export default function TicketingPage() {
                 </button>
               </div>
             </form>
+          </div>
+
+          {/* Popular Destinations */}
+          <div className="mt-12 text-center">
+            <p className="text-white/80 mb-4 font-helvetica">Popular destinations:</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {popularDestinations.map((city) => (
+                <button
+                  key={city}
+                  type="button"
+                  onClick={() => setTo(city)}
+                  className="bg-black/20 border border-white/30 text-white px-4 py-2 rounded-full text-sm font-helvetica hover:bg-black/30 transition-colors duration-200"
+                >
+                  {city}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>

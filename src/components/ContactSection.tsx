@@ -76,7 +76,7 @@ const ContactSection = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 font-helvetica">
-                  Full Name *
+                  Full Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -85,14 +85,14 @@ const ContactSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica text-black"
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2 font-helvetica">
-                  Email Address *
+                  Email Address <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -101,7 +101,7 @@ const ContactSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica text-black"
                   placeholder="your@email.com"
                 />
               </div>
@@ -125,7 +125,7 @@ const ContactSection = () => {
                     }}
                     maxLength={9}
                     inputMode="numeric"
-                    className="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
+                    className="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica text-black"
                     placeholder="50 123 4567"
                   />
                 </div>
@@ -136,7 +136,7 @@ const ContactSection = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-4 font-helvetica">
-                  Choose Service *
+                  Choose Service <span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-wrap gap-4">
                   {[
@@ -172,7 +172,7 @@ const ContactSection = () => {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2 font-helvetica">
-                  Message *
+                  Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -181,10 +181,11 @@ const ContactSection = () => {
                   onChange={handleChange}
                   required
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EE8900] focus:border-transparent font-helvetica text-black"
                   placeholder="Tell us about your travel plans..."
                 />
               </div>
+              
 
               <button
                 type="submit"

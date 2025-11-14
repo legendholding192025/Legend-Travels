@@ -372,7 +372,7 @@ export default function DestinationDetailPage() {
       <section className="pt-8 pb-6 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">{destination.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-2" style={{ color: '#2B1C48' }}>{destination.title}</h1>
             <p className="text-lg text-gray-600 mb-2">{destination.country}</p>
             <p className="text-2xl font-bold text-[#EE8900]">Starting from {destination.price}</p>
           </div>
