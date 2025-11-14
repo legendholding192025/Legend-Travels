@@ -16,7 +16,7 @@ const config: Config = {
         'headline': ['35px', { lineHeight: '1.2', fontWeight: 'bold' }],
         'subhead': ['25px', { lineHeight: '1.3', fontWeight: 'bold' }],
         'body': ['12px', { lineHeight: '1.5', fontWeight: 'normal' }],
-        'callout': ['8px', { lineHeight: '1.4', fontWeight: 'bold', fontStyle: 'oblique' }],
+        'callout': ['8px', { lineHeight: '1.4', fontWeight: 'bold' }],
       },
       colors: {
         background: "var(--background)",
