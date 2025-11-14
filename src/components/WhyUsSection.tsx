@@ -2,7 +2,20 @@
 
 import { useEffect, useRef, useState } from "react"
 
-const features = [
+export type WhyUsFeature = {
+  title: string
+  description: string
+  bgImage: string
+  iconSrc: string
+}
+
+export type WhyUsStat = {
+  label: string
+  value: number
+  prefix?: string
+}
+
+const defaultFeatures: WhyUsFeature[] = [
   {
     title: "IATA Certified",
     description: "Official certification ensuring industry compliance and quality standards",
@@ -29,7 +42,7 @@ const features = [
   },
 ]
 
-const stats = [
+const defaultStats: WhyUsStat[] = [
   {
     label: "Satisfied Customers",
     value: 20000,
@@ -47,7 +60,13 @@ const stats = [
   },
 ]
 
-function WhyChooseUsComponent() {
+type WhyChooseUsProps = {
+  features?: WhyUsFeature[]
+  stats?: WhyUsStat[]
+  heading?: string
+}
+
+function WhyChooseUsComponent({ features = defaultFeatures, stats = defaultStats, heading = "Why Choose Us" }: WhyChooseUsProps = {}) {
   const [counts, setCounts] = useState(() => stats.map(() => 0))
   const [hasAnimated, setHasAnimated] = useState(false)
   const statsRef = useRef<HTMLDivElement | null>(null)
@@ -99,7 +118,7 @@ function WhyChooseUsComponent() {
     rafId = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(rafId)
-  }, [hasAnimated])
+  }, [hasAnimated, stats])
 
   return (
     <section className="w-full py-16 md:py-24" style={{ backgroundColor: "#5D376E" }}>
@@ -107,7 +126,7 @@ function WhyChooseUsComponent() {
         {/* Heading */}
         <div className="mb-12 text-center">
           <h2 className="text-balance text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-            Why Choose Us
+            {heading}
           </h2>
         </div>
 
